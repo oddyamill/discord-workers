@@ -10,14 +10,16 @@ import { request } from '../request'
 
 export function getAccessToken(
   env: OauthEnv,
-  redirectUri: string,
-  code: string
+  url: URL,
 ) {
+  const code = url.searchParams.get('code')!,
+    redirect_uri = url.origin + url.pathname
+
   const data: RESTPostOAuth2AccessTokenURLEncodedData = {
     client_id: env.DISCORD_CLIENT_ID,
     client_secret: env.DISCORD_CLIENT_SECRET,
     grant_type: 'authorization_code',
-    redirect_uri: redirectUri,
+    redirect_uri,
     code,
   }
 

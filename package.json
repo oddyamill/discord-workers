@@ -1,0 +1,25 @@
+{
+  "name": "@oddyamill/discord-workers",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "git+https://github.com/oddyamill/discord-workers.git"
+  },
+  "dependencies": {
+    "discord-api-types": "^0.37.78"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240402.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.3"
+  }
+}

@@ -8,7 +8,7 @@ function hexToBin(hex: string) {
   const buffer = new Uint8Array(Math.ceil(hex.length / 2))
 
   for (let i = 0; i < buffer.length; i++) {
-    buffer.set([parseInt(hex.slice(i * 2, i * 2 + 2), 16)], i)
+		buffer[i] = parseInt(hex.substr(i * 2, 2), 16);
   }
 
   return buffer

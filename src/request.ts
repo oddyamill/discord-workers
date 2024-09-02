@@ -1,7 +1,11 @@
 import { RouteBases } from 'discord-api-types/v10'
 import { BotEnv } from './env'
 
-export async function request<T>(pathname: string, init: RequestInit = {}) {
+export interface Init extends RequestInit {
+  noResponse?: boolean
+}
+
+export async function request<T>(pathname: string, init: Init = {}) {
   const response = await fetch(RouteBases.api + pathname, {
     ...init,
     headers: {
@@ -14,10 +18,14 @@ export async function request<T>(pathname: string, init: RequestInit = {}) {
     throw new Error(`Request failed: ${response.status} ${response.statusText}`)
   }
 
+  if (init.noResponse) {
+    return undefined as T
+  }
+
   return response.json() as T
 }
 
-export async function requestWithAuth<T>(env: BotEnv, pathname: string, init: RequestInit = {}) {
+export async function requestWithAuth<T>(env: BotEnv, pathname: string, init: Init = {}) {
   const auth = env.DISCORD_TOKEN.startsWith('Bot ') ? env.DISCORD_TOKEN : `Bot ${env.DISCORD_TOKEN}`
 
   return request<T>(pathname, {

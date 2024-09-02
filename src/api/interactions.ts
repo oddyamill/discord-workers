@@ -6,7 +6,7 @@ import {
   Routes,
 } from 'discord-api-types/v10'
 import { RespondData } from './types/RespondData'
-import { request } from '../request'
+import { request, Init } from '../request'
 
 export function respond<T extends InteractionResponseType>(
   type: T,
@@ -19,7 +19,7 @@ export function editResponse(
   interaction: APIInteraction,
   data: RESTPatchAPIInteractionOriginalResponseJSONBody | FormData
 ) {
-  const init: RequestInit = {
+  const init: Init = {
     method: 'PATCH',
   }
 

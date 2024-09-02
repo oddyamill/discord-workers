@@ -15,7 +15,7 @@
     "url": "git+https://github.com/oddyamill/discord-workers.git"
   },
   "dependencies": {
-    "discord-api-types": "^0.37.78"
+    "discord-api-types": "^0.37.98"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240402.0",

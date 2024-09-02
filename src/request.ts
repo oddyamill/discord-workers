@@ -1,4 +1,5 @@
 import { RouteBases } from 'discord-api-types/v10'
+import { BotEnv } from './env'
 
 export async function request<T>(pathname: string, init: RequestInit = {}) {
   const response = await fetch(RouteBases.api + pathname, {
@@ -14,4 +15,13 @@ export async function request<T>(pathname: string, init: RequestInit = {}) {
   }
 
   return response.json() as T
+}
+
+export async function requestWithAuth<T>(env: BotEnv, pathname: string, init: RequestInit = {}) {
+  const auth = env.DISCORD_TOKEN.startsWith('Bot ') ? env.DISCORD_TOKEN : `Bot ${env.DISCORD_TOKEN}`
+
+  return request<T>(pathname, {
+    ...init,
+    headers: { Authorization: auth, ...(init.headers ?? {}) },
+  })
 }

@@ -5,4 +5,5 @@ export interface OauthEnv {
 
 export interface BotEnv {
   DISCORD_PUBLIC_KEY: string
+  DISCORD_TOKEN: string
 }

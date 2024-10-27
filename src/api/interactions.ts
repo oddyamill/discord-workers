@@ -28,8 +28,8 @@ export function sendResponse<T extends InteractionResponseType>(interaction: API
     init.body = JSON.stringify({ type, data })
   }
 
-  return request<RespondData[T]>(
-    Routes.interactionCallback(interaction.application_id, interaction.token),
+  return request(
+    Routes.interactionCallback(interaction.id, interaction.token),
     init
   )
 }

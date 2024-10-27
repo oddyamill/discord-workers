@@ -86,7 +86,7 @@ export function deleteApplicationEmoji(
     Routes.applicationEmoji(applicationId, emojiId),
     {
       method: 'DELETE',
-      noResponse: true,
+      void: true,
     }
   )
 }

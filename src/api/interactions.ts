@@ -15,6 +15,24 @@ export function respond<T extends InteractionResponseType>(
   return Response.json({ type, data })
 }
 
+export function sendResponse<T extends InteractionResponseType>(interaction: APIInteraction, type: T, data: RespondData[T] | FormData) {
+  const init: Init = {
+    method: 'POST',
+  }
+
+  if (data instanceof FormData) {
+    init.body = data
+  } else {
+    init.headers = { 'Content-Type': 'application/json' }
+    init.body = JSON.stringify({ type, data })
+  }
+
+  return request<RespondData[T]>(
+    Routes.webhookMessage(interaction.application_id, interaction.token),
+    init
+  )
+}
+
 export function editResponse(
   interaction: APIInteraction,
   data: RESTPatchAPIInteractionOriginalResponseJSONBody | FormData

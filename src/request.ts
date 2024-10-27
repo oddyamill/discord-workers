@@ -2,7 +2,7 @@ import { RouteBases } from 'discord-api-types/v10'
 import { BotEnv } from './env'
 
 export interface Init extends RequestInit {
-  noResponse?: boolean
+  void?: boolean
 }
 
 export async function request<T>(pathname: string, init: Init = {}) {
@@ -18,7 +18,7 @@ export async function request<T>(pathname: string, init: Init = {}) {
     throw new Error(`Request failed: ${response.status} ${response.statusText}`)
   }
 
-  if (init.noResponse) {
+  if (init.void) {
     return undefined as T
   }
 

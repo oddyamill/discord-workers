@@ -18,6 +18,7 @@ export function respond<T extends InteractionResponseType>(
 export function sendResponse<T extends InteractionResponseType>(interaction: APIInteraction, type: T, data: RespondData[T] | FormData) {
   const init: Init = {
     method: 'POST',
+    void: true,
   }
 
   if (data instanceof FormData) {
@@ -28,7 +29,7 @@ export function sendResponse<T extends InteractionResponseType>(interaction: API
   }
 
   return request<RespondData[T]>(
-    Routes.webhookMessage(interaction.application_id, interaction.token),
+    Routes.interactionCallback(interaction.application_id, interaction.token),
     init
   )
 }

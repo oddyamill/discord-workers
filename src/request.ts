@@ -5,8 +5,18 @@ export interface Init extends RequestInit {
   void?: boolean
 }
 
+export type URLBuilder = (pathname: string) => string
+
+let buildURL: URLBuilder = (pathname: string) => {
+  return RouteBases.api + pathname
+}
+
+export function setURLBuilder(builder: URLBuilder) {
+  buildURL = builder
+}
+
 export async function request<T>(pathname: string, init: Init = {}) {
-  const response = await fetch(RouteBases.api + pathname, {
+  const response = await fetch(buildURL(pathname), {
     ...init,
     headers: {
       'User-Agent': 'DiscordBot (https://github.com/oddyamill/discord-workers, 0.0.0)',

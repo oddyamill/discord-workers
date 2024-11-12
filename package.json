@@ -9,7 +9,7 @@
     "dist"
   ],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org"
   },
   "repository": {
     "url": "git+https://github.com/oddyamill/discord-workers.git"

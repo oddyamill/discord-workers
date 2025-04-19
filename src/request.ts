@@ -25,7 +25,7 @@ export async function request<T>(pathname: string, init: Init = {}) {
   })
 
   if (!response.ok) {
-    throw new Error(`Request failed: ${response.status} ${response.statusText}`)
+    throw new Error(`Request failed: ${response.status} ${response.statusText} (${await response.text()})`)
   }
 
   if (init.void) {

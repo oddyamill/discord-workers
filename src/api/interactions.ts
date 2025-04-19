@@ -3,8 +3,8 @@ import {
   InteractionResponseType,
   RESTPatchAPIInteractionOriginalResponseJSONBody,
   RESTPatchAPIInteractionOriginalResponseResult,
-  RESTPostAPIChannelWebhookJSONBody,
-  RESTPostAPIChannelWebhookResult,
+  RESTPostAPIWebhookWithTokenJSONBody,
+  RESTPostAPIWebhookWithTokenResult,
   Routes,
 } from 'discord-api-types/v10'
 import { RespondData } from './types/RespondData'
@@ -59,10 +59,11 @@ export function editResponse(
 
 export function sendFollowUp(
   interaction: APIInteraction,
-  data: RESTPostAPIChannelWebhookJSONBody | FormData
+  data: RESTPostAPIWebhookWithTokenJSONBody | FormData
 ) {
   const init: Init = {
     method: 'POST',
+    void: true,
   }
 
   if (data instanceof FormData) {
@@ -72,7 +73,7 @@ export function sendFollowUp(
     init.body = JSON.stringify(data)
   }
 
-  return request<RESTPostAPIChannelWebhookResult>(
+  return request<RESTPostAPIWebhookWithTokenResult>(
     Routes.webhook(interaction.application_id, interaction.token),
     init
   )
